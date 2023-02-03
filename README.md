@@ -14,10 +14,9 @@ kubectl get deployments
 NAME             READY   UP-TO-DATE   AVAILABLE   AGE
 springboot-k8s   1/1     1            1           3s
 
-kubectl get pods
+kubectl get pods                     
 NAME                              READY   STATUS    RESTARTS   AGE
-springboot-k8s                    1/1     Running   0          2m53s
-springboot-k8s-6f8ddcbb45-wf7kz   1/1     Running   0          41s
+springboot-k8s-6f8ddcbb45-wf7kz   1/1     Running   0          11m
 
 kubectl expose deployment springboot-k8s --type=NodePort
 service/springboot-k8s exposed
@@ -33,12 +32,53 @@ springboot-k8s   NodePort    10.109.74.102   <none>        8080:30436/TCP   2m3s
 minikube ip
 192.168.49.2
 
+http://192.168.49.2:30436/greeting
 
+kubectl get nodes -o wide 
+NAME       STATUS   ROLES           AGE   VERSION   INTERNAL-IP    EXTERNAL-IP   OS-IMAGE             KERNEL-VERSION     CONTAINER-RUNTIME
+minikube   Ready    control-plane   23h   v1.26.1   192.168.49.2   <none>        Ubuntu 20.04.5 LTS   5.15.49-linuxkit   docker://20.10.23
+
+kubectl get nodes -o wide            
+NAME       STATUS   ROLES           AGE   VERSION   INTERNAL-IP    EXTERNAL-IP   OS-IMAGE             KERNEL-VERSION     CONTAINER-RUNTIME
+minikube   Ready    control-plane   23h   v1.26.1   192.168.49.2   <none>        Ubuntu 20.04.5 LTS   5.15.49-linuxkit   docker://20.10.23
+
+kubectl logs springboot-k8s-6f8ddcbb45-wf7kz                                 
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::        (v2.2.6.RELEASE)
+
+2023-02-03 19:50:50.646  INFO 1 --- [           main] c.s.k.s.SpringbootKubernetesApplication  : Starting SpringbootKubernetesApplication v0.0.1-SNAPSHOT on springboot-k8s-6f8ddcbb45-wf7kz with PID 1 (/app.jar started by root in /)
+2023-02-03 19:50:50.649  INFO 1 --- [           main] c.s.k.s.SpringbootKubernetesApplication  : No active profile set, falling back to default profiles: default
+2023-02-03 19:50:52.378  INFO 1 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2023-02-03 19:50:52.429  INFO 1 --- [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-02-03 19:50:52.430  INFO 1 --- [           main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.33]
+2023-02-03 19:50:52.478  INFO 1 --- [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-02-03 19:50:52.478  INFO 1 --- [           main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1714 ms
+2023-02-03 19:50:52.765  INFO 1 --- [           main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2023-02-03 19:50:53.065  INFO 1 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2023-02-03 19:50:53.069  INFO 1 --- [           main] c.s.k.s.SpringbootKubernetesApplication  : Started SpringbootKubernetesApplication in 3.337 seconds (JVM running for 3.89)
+
+kubectl get svc
+
+kubectl pods -o wide               
+NAME                              READY   STATUS    RESTARTS   AGE     IP            NODE       NOMINATED NODE   READINESS GATES
+springboot-k8s-6f8ddcbb45-gwbmx   1/1     Running   0          5m45s   10.244.0.68   minikube   <none>           <none>
+
+kubectl scale --replicas=3 deployment/springboot-k8s
+
+kubectl get pods -o wide                              
+NAME                              READY   STATUS    RESTARTS   AGE     IP            NODE       NOMINATED NODE   READINESS GATES
+springboot-k8s-6f8ddcbb45-dcx9v   1/1     Running   0          4s      10.244.0.69   minikube   <none>           <none>
+springboot-k8s-6f8ddcbb45-gq4p5   1/1     Running   0          4s      10.244.0.70   minikube   <none>           <none>
+springboot-k8s-6f8ddcbb45-gwbmx   1/1     Running   0          9m21s   10.244.0.68   minikube   <none>           <none>
 ```
 
 ```
 Deployment is responsible to run a set of pods and service gives network access to these pods
-
 ```
 
 <img width="1777" alt="Screenshot 2023-02-04 at 12 56 13 AM" src="https://user-images.githubusercontent.com/43849911/216690221-dec619d5-af9a-48f3-9c1f-babb42942c79.png">
