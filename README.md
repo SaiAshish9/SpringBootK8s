@@ -75,6 +75,21 @@ NAME                              READY   STATUS    RESTARTS   AGE     IP       
 springboot-k8s-6f8ddcbb45-dcx9v   1/1     Running   0          4s      10.244.0.69   minikube   <none>           <none>
 springboot-k8s-6f8ddcbb45-gq4p5   1/1     Running   0          4s      10.244.0.70   minikube   <none>           <none>
 springboot-k8s-6f8ddcbb45-gwbmx   1/1     Running   0          9m21s   10.244.0.68   minikube   <none>           <none>
+
+minikube service springboot-k8s
+|-----------|----------------|-------------|---------------------------|
+| NAMESPACE |      NAME      | TARGET PORT |            URL            |
+|-----------|----------------|-------------|---------------------------|
+| default   | springboot-k8s |        8080 | http://192.168.49.2:30794 |
+|-----------|----------------|-------------|---------------------------|
+🏃  Starting tunnel for service springboot-k8s.
+|-----------|----------------|-------------|------------------------|
+| NAMESPACE |      NAME      | TARGET PORT |          URL           |
+|-----------|----------------|-------------|------------------------|
+| default   | springboot-k8s |             | http://127.0.0.1:50941 |
+|-----------|----------------|-------------|------------------------|
+🎉  Opening service default/springboot-k8s in default browser...
+❗  Because you are using a Docker driver on darwin, the terminal needs to be open to run it.
 ```
 
 ```
@@ -86,3 +101,9 @@ Deployment is responsible to run a set of pods and service gives network access 
 <img width="923" alt="Screenshot 2023-02-04 at 12 57 04 AM" src="https://user-images.githubusercontent.com/43849911/216690391-9cf4abf7-da77-4fe8-a07e-ec0ba5f5a209.png">
 
 <img width="722" alt="Screenshot 2023-02-04 at 1 02 28 AM" src="https://user-images.githubusercontent.com/43849911/216691390-25d668dc-fe75-4caf-b6de-a1a43c516135.png">
+
+<img width="1122" alt="Screenshot 2023-02-04 at 1 55 15 AM" src="https://user-images.githubusercontent.com/43849911/216703733-3e77562c-03c2-4e6a-b357-19e2cf38a223.png">
+
+<img width="718" alt="Screenshot 2023-02-04 at 1 55 32 AM" src="https://user-images.githubusercontent.com/43849911/216703783-d3e18559-0052-4804-860f-c1af676e5cf7.png">
+
+
