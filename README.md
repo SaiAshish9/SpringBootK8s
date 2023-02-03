@@ -5,10 +5,13 @@ eval $(minikube docker-env)
 
 docker build -t springboot-k8s:1.0 .
 
+/*
 kubectl run springboot-k8s --image=springboot-k8s:1.0 --port 8080 --image-pull-policy=Never
 pod/springboot-k8s created
+*/
 
-kubectl create deployment springboot-k8s --image=springboot-k8s:1.0 --port 8080 deployment.apps/springboot-k8s created
+kubectl create deployment springboot-k8s --image=springboot-k8s:1.0 --port 8080 
+deployment.apps/springboot-k8s created
 
 kubectl get deployments                  
 NAME             READY   UP-TO-DATE   AVAILABLE   AGE
@@ -20,9 +23,6 @@ springboot-k8s-6f8ddcbb45-wf7kz   1/1     Running   0          11m
 
 kubectl expose deployment springboot-k8s --type=NodePort
 service/springboot-k8s exposed
-
-kubectl autoscale deployment springboot-k8s --cpu-percent=50 --min=1 --max=10
-horizontalpodautoscaler.autoscaling/springboot-k8s autoscaled
 
 kubectl get services                 
 NAME             TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE
@@ -112,6 +112,55 @@ minikube dashboard
 🚀  Launching proxy ...
 🤔  Verifying proxy health ...
 🎉  Opening http://127.0.0.1:51009/api/v1/namespaces/kubernetes-dashboard/services/http:kubernetes-dashboard:/proxy/ in your default browser...
+
+
+// when it reached 50% autoscale container
+kubectl autoscale deployment springboot-k8s --cpu-percent=50 --min=1 --max=10
+horizontalpodautoscaler.autoscaling/springboot-k8s autoscaled
+
+kubectl get hpa
+// hpa => orizontalpodautoscaler
+
+kubectl get hpa
+NAME             REFERENCE                   TARGETS         MINPODS   MAXPODS   REPLICAS   AGE
+springboot-k8s   Deployment/springboot-k8s   <unknown>/50%   1         10        3          46m
+
+kubectl get deployments
+NAME             READY   UP-TO-DATE   AVAILABLE   AGE
+springboot-k8s   3/3     3            3           27m
+
+kubectl get deployments -o wide
+NAME             READY   UP-TO-DATE   AVAILABLE   AGE   CONTAINERS       IMAGES               SELECTOR
+springboot-k8s   3/3     3            3           27m   springboot-k8s   springboot-k8s:1.0   app=springboot-k8s
+
+Process to update image:
+
+docker build -t springboot-k8s:2.0 .
+
+kubectl set image deployment springboot-k8s springboot-k8s=springboot-k8s:2.0
+
+kubectl get pods
+NAME                              READY   STATUS    RESTARTS   AGE
+springboot-k8s-6f8ddcbb45-dcx9v   1/1     Running   0          22m
+springboot-k8s-6f8ddcbb45-gq4p5   1/1     Running   0          22m
+springboot-k8s-6f8ddcbb45-gwbmx   1/1     Running   0          31m
+
+kubectl get deployments
+NAME             READY   UP-TO-DATE   AVAILABLE   AGE
+springboot-k8s   3/3     3            3           31m
+
+kubectl get services   
+NAME             TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)          AGE
+kubernetes       ClusterIP   10.96.0.1      <none>        443/TCP          24h
+springboot-k8s   NodePort    10.103.28.69   <none>        8080:30794/TCP   32m
+
+kubectl describe rs
+
+kubectl describe deployments
+
+kubectl apply -f deployment.yml
+kubectl apply -f service.yml
+
 ```
 
 ```
@@ -149,5 +198,11 @@ Deployment is responsible to run a set of pods and service gives network access 
 <img width="1792" alt="Screenshot 2023-02-04 at 2 04 53 AM" src="https://user-images.githubusercontent.com/43849911/216705608-f5c79fef-7a62-4b26-9310-370c9eefbbc6.png">
 
 <img width="1792" alt="Screenshot 2023-02-04 at 2 05 22 AM" src="https://user-images.githubusercontent.com/43849911/216705697-68592142-a844-4376-b4d0-c48c61a7bd27.png">
+
+<img width="1043" alt="Screenshot 2023-02-04 at 2 13 20 AM" src="https://user-images.githubusercontent.com/43849911/216706986-a81ee5c9-a9ea-4e0e-a097-bd83830438fd.png">
+
+<img width="760" alt="Screenshot 2023-02-04 at 2 15 52 AM" src="https://user-images.githubusercontent.com/43849911/216707472-3adb0fd5-c560-4243-87a6-6af108497aea.png">
+
+<img width="851" alt="Screenshot 2023-02-04 at 2 16 54 AM" src="https://user-images.githubusercontent.com/43849911/216707620-5a02e550-5211-4c44-b267-3dd1d66adb26.png">
 
 
