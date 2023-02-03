@@ -90,6 +90,28 @@ minikube service springboot-k8s
 |-----------|----------------|-------------|------------------------|
 🎉  Opening service default/springboot-k8s in default browser...
 ❗  Because you are using a Docker driver on darwin, the terminal needs to be open to run it.
+
+
+kubectl get deployments
+NAME             READY   UP-TO-DATE   AVAILABLE   AGE
+springboot-k8s   3/3     3            3           13m
+
+kubectl get pods       
+NAME                              READY   STATUS    RESTARTS   AGE
+springboot-k8s-6f8ddcbb45-dcx9v   1/1     Running   0          5m21s
+springboot-k8s-6f8ddcbb45-gq4p5   1/1     Running   0          5m21s
+springboot-k8s-6f8ddcbb45-gwbmx   1/1     Running   0          14m
+
+// to check replicas
+kubectl get rs 
+NAME                        DESIRED   CURRENT   READY   AGE
+springboot-k8s-6f8ddcbb45   3         3         3       16m
+
+minikube dashboard
+🤔  Verifying dashboard health ...
+🚀  Launching proxy ...
+🤔  Verifying proxy health ...
+🎉  Opening http://127.0.0.1:51009/api/v1/namespaces/kubernetes-dashboard/services/http:kubernetes-dashboard:/proxy/ in your default browser...
 ```
 
 ```
@@ -105,5 +127,27 @@ Deployment is responsible to run a set of pods and service gives network access 
 <img width="1122" alt="Screenshot 2023-02-04 at 1 55 15 AM" src="https://user-images.githubusercontent.com/43849911/216703733-3e77562c-03c2-4e6a-b357-19e2cf38a223.png">
 
 <img width="718" alt="Screenshot 2023-02-04 at 1 55 32 AM" src="https://user-images.githubusercontent.com/43849911/216703783-d3e18559-0052-4804-860f-c1af676e5cf7.png">
+
+<img width="1044" alt="Screenshot 2023-02-04 at 1 59 36 AM" src="https://user-images.githubusercontent.com/43849911/216704659-87174333-d4e2-4b70-8936-36f98298acfb.png">
+
+<img width="1791" alt="Screenshot 2023-02-04 at 2 00 54 AM" src="https://user-images.githubusercontent.com/43849911/216704820-2220afb7-00fa-4d93-a123-a3a615293a2e.png">
+
+<img width="1791" alt="Screenshot 2023-02-04 at 2 01 28 AM" src="https://user-images.githubusercontent.com/43849911/216705055-1b855773-fc34-4588-bf3b-9d4ea4239af3.png">
+
+<img width="1789" alt="Screenshot 2023-02-04 at 2 01 50 AM" src="https://user-images.githubusercontent.com/43849911/216705112-fc287c3c-e8ff-4e27-be3c-e2ef3d9c9d36.png">
+
+<img width="1791" alt="Screenshot 2023-02-04 at 2 02 25 AM" src="https://user-images.githubusercontent.com/43849911/216705193-99147af6-eb58-4be2-91d6-c2e1f4c62172.png">
+
+<img width="1792" alt="Screenshot 2023-02-04 at 2 02 56 AM" src="https://user-images.githubusercontent.com/43849911/216705299-e6b54e4a-71c3-4c0d-b676-5b175a3f9bc6.png">
+
+<img width="1792" alt="Screenshot 2023-02-04 at 2 03 18 AM" src="https://user-images.githubusercontent.com/43849911/216705365-ca70935d-a2b3-404a-bc51-c592a0333987.png">
+
+<img width="1792" alt="Screenshot 2023-02-04 at 2 03 43 AM" src="https://user-images.githubusercontent.com/43849911/216705426-158b902a-e65f-48f0-b37a-83195323eb94.png">
+
+<img width="1792" alt="Screenshot 2023-02-04 at 2 04 15 AM" src="https://user-images.githubusercontent.com/43849911/216705508-d5235b2b-d74e-4591-adcd-34f80fc8c1ae.png">
+
+<img width="1792" alt="Screenshot 2023-02-04 at 2 04 53 AM" src="https://user-images.githubusercontent.com/43849911/216705608-f5c79fef-7a62-4b26-9310-370c9eefbbc6.png">
+
+<img width="1792" alt="Screenshot 2023-02-04 at 2 05 22 AM" src="https://user-images.githubusercontent.com/43849911/216705697-68592142-a844-4376-b4d0-c48c61a7bd27.png">
 
 
