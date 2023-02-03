@@ -205,4 +205,6 @@ Deployment is responsible to run a set of pods and service gives network access 
 
 <img width="851" alt="Screenshot 2023-02-04 at 2 16 54 AM" src="https://user-images.githubusercontent.com/43849911/216707620-5a02e550-5211-4c44-b267-3dd1d66adb26.png">
 
+<img width="1396" alt="Screenshot 2023-02-04 at 2 19 32 AM" src="https://user-images.githubusercontent.com/43849911/216708011-30f9713c-dcc1-4f41-8a33-442e5bb5acdb.png">
+
 
