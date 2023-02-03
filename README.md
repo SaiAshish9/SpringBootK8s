@@ -158,9 +158,30 @@ kubectl describe rs
 
 kubectl describe deployments
 
+kubectl delete deploy springboot-k8s
+kubectl delete svc springboot-k8s
+kubectl delete pod springboot-k8s
+
 kubectl apply -f deployment.yml
 kubectl apply -f service.yml
 
+kubectl apply -f deployment.yml
+deployment.apps/springboot-k8s created
+
+kubectl apply -f service.yml
+service/springboot-k8s created
+
+minikube service springboot-k8s
+http://127.0.0.1:51293/greeting
+
+kubectl delete deploy springboot-k8s
+kubectl delete svc springboot-k8s
+kubectl delete pod springboot-k8s
+
+docker rm $(docker ps -a -q) -f
+docker rmi $(docker images -a -q) -f
+docker ps -a
+docker images -a
 ```
 
 ```
@@ -206,5 +227,9 @@ Deployment is responsible to run a set of pods and service gives network access 
 <img width="851" alt="Screenshot 2023-02-04 at 2 16 54 AM" src="https://user-images.githubusercontent.com/43849911/216707620-5a02e550-5211-4c44-b267-3dd1d66adb26.png">
 
 <img width="1396" alt="Screenshot 2023-02-04 at 2 19 32 AM" src="https://user-images.githubusercontent.com/43849911/216708011-30f9713c-dcc1-4f41-8a33-442e5bb5acdb.png">
+
+<img width="1134" alt="Screenshot 2023-02-04 at 2 21 19 AM" src="https://user-images.githubusercontent.com/43849911/216708268-70d6e266-68fd-40ad-a5d2-ff77b8d89f18.png">
+
+<img width="1025" alt="Screenshot 2023-02-04 at 2 25 01 AM" src="https://user-images.githubusercontent.com/43849911/216708925-5f0d0740-b759-4630-a913-aadbae1834e4.png">
 
 
