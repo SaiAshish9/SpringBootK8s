@@ -5,11 +5,6 @@ eval $(minikube docker-env)
 
 docker build -t springboot-k8s:1.0 .
 
-/*
-kubectl run springboot-k8s --image=springboot-k8s:1.0 --port 8080 --image-pull-policy=Never
-pod/springboot-k8s created
-*/
-
 kubectl create deployment springboot-k8s --image=springboot-k8s:1.0 --port 8080 
 deployment.apps/springboot-k8s created
 
@@ -233,3 +228,9 @@ Deployment is responsible to run a set of pods and service gives network access 
 <img width="1025" alt="Screenshot 2023-02-04 at 2 25 01 AM" src="https://user-images.githubusercontent.com/43849911/216708925-5f0d0740-b759-4630-a913-aadbae1834e4.png">
 
 
+```
+/*
+kubectl run springboot-k8s --image=springboot-k8s:1.0 --port 8080 --image-pull-policy=Never
+pod/springboot-k8s created
+*/
+```
