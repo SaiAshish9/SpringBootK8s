@@ -114,7 +114,7 @@ kubectl autoscale deployment springboot-k8s --cpu-percent=50 --min=1 --max=10
 horizontalpodautoscaler.autoscaling/springboot-k8s autoscaled
 
 kubectl get hpa
-// hpa => orizontalpodautoscaler
+// hpa => horizontalpodautoscaler
 
 kubectl get hpa
 NAME             REFERENCE                   TARGETS         MINPODS   MAXPODS   REPLICAS   AGE
